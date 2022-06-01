@@ -108,9 +108,58 @@ aux = data.groupby(['Fecha de diagnóstico']).size()
 aux.sort_values(ascending=False)
 
 #22
-
 cantidad_muertes = data[data['Estado'] == 'Fallecido'].shape[0]
 cantidad_recuperados = data.query('Recuperado == "Recuperado"').shape[0]
 cantidad_casos = data.shape[0]
 tasa_mortalidad = cantidad_muertes / cantidad_casos * 100
 tasa_recuperacion = cantidad_recuperados / cantidad_casos * 100
+
+#23
+cantidad_muertes_dep = data[data['Estado'] == 'Fallecido'].groupby('Nombre departamento').size()
+cantidad_recuperados_dep = data[data['Recuperado'] == 'Recuperado'].groupby('Nombre departamento').size()
+cantidad_casos_dep = data.groupby('Nombre departamento').size()
+tasa_mortalidad_dep = cantidad_muertes_dep / cantidad_casos_dep * 100
+tasa_recuperacion_dep = cantidad_recuperados_dep / cantidad_casos_dep * 100
+data2 = pd.DataFrame({'tasa_mortalidad_dep': tasa_mortalidad_dep, 'tasa_recuperacion_dep':tasa_recuperacion_dep})
+
+#24
+cantidad_muertes_ciu = data[data['Estado'] == 'Fallecido'].groupby('Nombre municipio').size()
+cantidad_recuperados_ciu = data[data['Recuperado'] == 'Recuperado'].groupby('Nombre municipio').size()
+cantidad_casos_ciu = data.groupby('Nombre municipio').size()
+tasa_mortalidad_ciu = cantidad_muertes_ciu / cantidad_casos_ciu * 100
+tasa_recuperacion_ciu = cantidad_recuperados_ciu / cantidad_casos_ciu * 100
+data3 = pd.DataFrame({'tasa_mortalidad_ciu': tasa_mortalidad_ciu, 'tasa_recuperacion_ciu':tasa_recuperacion_ciu})
+
+#25
+data.groupby(['Nombre municipio', 'Ubicación del caso']).size()
+
+#26
+data.groupby(['Nombre municipio', 'Sexo'])['Edad'].mean()
+
+#27
+data[(data['Recuperado'] == 'Recuperado')].groupby('Fecha de diagnóstico').size().plot()
+data[(data['Estado'] == 'Fallecido')].groupby('Fecha de diagnóstico').size().plot()
+
+#28
+aux = data[(data['Estado'] == 'Fallecido')].groupby('Nombre departamento').size()
+aux.sort_values(ascending=False).head(10).plot()
+aux = data[(data['Recuperado'] == 'Recuperado')].groupby('Nombre departamento').size()
+aux.sort_values(ascending=False).head(10).plot()
+
+#29
+aux = data[(data['Estado'] == 'Fallecido')].groupby('Nombre municipio').size()
+aux.sort_values(ascending=False).head(10).plot()
+aux = data[(data['Recuperado'] == 'Recuperado')].groupby('Nombre municipio').size()
+aux.sort_values(ascending=False).head(10).plot()
+
+#30
+aux = data[(data['Estado'] == 'Fallecido')].groupby('Edad').size()
+aux.sort_values(ascending=False).head(10)
+
+#31
+data.groupby('Ubicación del caso').mean()
+
+#32
+data.groupby('Ubicación del caso').size().plot(kind='bar')
+
+
