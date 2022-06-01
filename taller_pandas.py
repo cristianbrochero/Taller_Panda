@@ -91,3 +91,26 @@ aux.sort_values(ascending=False).head(10)
 #17
 aux = data.groupby(['Nombre departamento', 'Nombre municipio']).size()
 aux.sort_values(ascending=False)
+
+#18
+aux = data.groupby(['Nombre departamento', 'Nombre municipio', 'Sexo']).size()
+aux.sort_values(ascending=False)
+
+#19
+data.groupby(['Nombre departamento', 'Nombre municipio', 'Sexo'])['Edad'].mean()
+
+#20
+aux = data.groupby(['Nombre del país']).size()
+aux.sort_values(ascending=False)
+
+#21
+aux = data.groupby(['Fecha de diagnóstico']).size()
+aux.sort_values(ascending=False)
+
+#22
+
+cantidad_muertes = data[data['Estado'] == 'Fallecido'].shape[0]
+cantidad_recuperados = data.query('Recuperado == "Recuperado"').shape[0]
+cantidad_casos = data.shape[0]
+tasa_mortalidad = cantidad_muertes / cantidad_casos * 100
+tasa_recuperacion = cantidad_recuperados / cantidad_casos * 100
