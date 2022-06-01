@@ -52,3 +52,24 @@ NumeroDePersonasRecuper = aux.shape[0]
 aux = data.loc[(data['Estado'] == 'Fallecido')]
 NumeroDePersonasFallecidas = aux.shape[0]
 
+#7
+data.sort_values(by=data.loc[(data['Tipo de contagio'] == 'Importado')],ascending=False )
+data.sort_values(by=data.loc[(data['Tipo de contagio'] == 'Relacionado')],ascending=False )
+
+#8
+data['Nombre departamento'].nunique()
+
+#9
+data['Nombre departamento'].value_counts()
+
+
+#10
+data.sort_values(by='Ubicación del caso',ascending=False )
+
+#11
+data['Nombre departamento'].value_counts().head(10)
+
+#12
+aux = data[(data['Estado'] == 'Fallecido')].groupby('Nombre departamento').size()
+
+aux.sort_values(ascending=False).head(10)
