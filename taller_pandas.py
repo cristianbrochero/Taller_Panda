@@ -162,4 +162,13 @@ data.groupby('Ubicación del caso').mean()
 #32
 data.groupby('Ubicación del caso').size().plot(kind='bar')
 
+#33
+data.groupby('Sexo').size().plot(kind='bar')
+
+#34
+data.groupby('Tipo de contagio').size().plot(kind='bar')
+
+#35
+data[(data['Recuperado'] == 'Recuperado')].groupby('Fecha de diagnóstico').size().plot(kind='bar')
+data[(data['Estado'] == 'Fallecido')].groupby('Fecha de diagnóstico').size().plot(kind='bar')
 
